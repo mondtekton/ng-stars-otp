@@ -19,4 +19,4 @@ otp:
   length: 6
   charset: "0123456789"
   expiry-min: 10
-  max-attemps: 5
+  max-attempts: 5
