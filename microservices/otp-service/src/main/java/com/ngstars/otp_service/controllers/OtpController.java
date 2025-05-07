@@ -1,15 +1,16 @@
 package com.ngstars.otp_service.controllers;
 
 import com.ngstars.email_service.dto.EmailRequest;
-import com.ngstars.otp_service.clients.EmailClient;
 import com.ngstars.otp_service.configs.OtpConfig;
 import com.ngstars.otp_service.dto.*;
 import com.ngstars.otp_service.entities.Otp;
 import com.ngstars.otp_service.interfaces.OtpInterface;
 import com.ngstars.otp_service.response.Response;
 import com.ngstars.otp_service.utils.EmailTemplate;
+import com.ngstars.otp_service.webclient.EmailService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,8 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class OtpController {
 
   private final OtpInterface otpService;
-  private final EmailClient emailClient;
   private final OtpConfig config;
+  @Autowired
+  private EmailService emailClient;
 
   @PostMapping("/generate")
   public Response generate(@Valid @RequestBody OtpGenerateRequest request) {
@@ -40,7 +42,7 @@ public class OtpController {
         EmailRequest.builder().to(otp.getIdentifier()).subject(subject).message(message).build();
     System.out.println("Sending email...");
     // emailClient.sendEmail(emailRequest);
-    emailClient.sendEmail(new EmailRequest("mondodev88@gmail.com", "Test", "ok ok ok"));
+    emailClient.send(new EmailRequest("mondodev88@gmail.com", "Test", "ok ok ok"));
     System.out.println("Email sent");
 
     return Response.ok("OTP generated successfully and sent to your inbox!", data);
