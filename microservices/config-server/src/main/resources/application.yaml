@@ -1,12 +1,33 @@
 spring:
   application:
     name: config-server
+  profiles:
+    active: git
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: classpath:/configs/
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/mondtekton/ng-stars-otp
-          clone-on-start: true
+          uri: https://github.com/mondtekton/ng-stars-otp-configs
           default-label: main
+          username: ${GIT_USER}
+          password: ${GIT_PASSWORD}
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://github.com/mondtekton/ng-stars-otp-configs
+#          clone-on-start: true
+#          username: ${GIT_USER}
+#          password: ${GIT_PASSWORD}
+
+
+
 server:
   port: 9292
+
+email: Email service started

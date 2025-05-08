@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: email-service
+  profiles:
+    active: dev
+  config:
+    import: configserver:http://localhost:9292
+
+server:
+  port: 8081
