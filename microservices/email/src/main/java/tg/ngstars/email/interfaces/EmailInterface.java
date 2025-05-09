@@ -1,8 +1,8 @@
-package tg.ngstars.email.service;
+package tg.ngstars.email.interfaces;
 
 import tg.ngstars.entities.EmailRequest;
 
-public interface EmailService {
+public interface EmailInterface {
 
-    public void sendEmail(EmailRequest request);
+    void sendEmail(EmailRequest request);
 }

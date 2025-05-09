@@ -1,10 +1,10 @@
-package tg.ngstars.shared;
+package tg.ngstars.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SharedApplicationTests {
+class GatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

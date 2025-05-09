@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class EmailServiceApplication {
+public class EmailApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(EmailServiceApplication.class, args);
+    SpringApplication.run(EmailApplication.class, args);
   }
 
 }

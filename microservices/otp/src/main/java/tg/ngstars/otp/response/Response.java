@@ -21,7 +21,16 @@ public class Response {
         .build();
   }
 
-  public static <T> Response ok(String message, Object data) {
+  public static Response ok(String message, Object data) {
     return Response.success(HttpStatus.OK, message, data);
+  }
+
+  public static Response failure(String message, Object data) {
+    return Response.builder()
+            .success(false)
+            .httpStatus(HttpStatus.UNAUTHORIZED)
+            .message(message)
+            .data(data)
+            .build();
   }
 }

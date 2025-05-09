@@ -1,26 +1,30 @@
 package tg.ngstars.otp.controllers;
 
+import lombok.AllArgsConstructor;
+import tg.ngstars.entities.EmailRequest;
+import tg.ngstars.otp.clients.EmailClient;
 import tg.ngstars.otp.configs.OtpConfig;
 import tg.ngstars.otp.dto.*;
 import tg.ngstars.otp.entities.Otp;
 import tg.ngstars.otp.interfaces.OtpInterface;
 import tg.ngstars.otp.response.Response;
 import tg.ngstars.otp.utils.EmailTemplate;
-import tg.ngstars.otp.webclient.EmailService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/otp")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class OtpController {
 
   private final OtpInterface otpService;
   private final OtpConfig config;
-  @Autowired
-  private EmailService emailClient;
+  private EmailClient emailClient;
+
+  @GetMapping("/value")
+  private String getValue(){
+    return new EmailRequest("mondodev88@gmail.com", "Test", "ok ok ok").getTo();
+  }
 
   @PostMapping("/generate")
   public Response generate(@Valid @RequestBody OtpGenerateRequest request) {
@@ -37,11 +41,11 @@ public class OtpController {
     // Send the generated otp
     String subject = EmailTemplate.subject();
     String message = EmailTemplate.content(otp.getCode(), config.getExpiryMin(), "NG-Stars");
-    EmailRequest emailRequest =
-        EmailRequest.builder().to(otp.getIdentifier()).subject(subject).message(message).build();
+    EmailRequest email = EmailRequest.builder().to(otp.getIdentifier()).subject(subject).message(message).build();
+
     System.out.println("Sending email...");
     // emailClient.sendEmail(emailRequest);
-    emailClient.send(new EmailRequest("mondodev88@gmail.com", "Test", "ok ok ok"));
+    emailClient.send(email);
     System.out.println("Email sent");
 
     return Response.ok("OTP generated successfully and sent to your inbox!", data);
@@ -56,6 +60,9 @@ public class OtpController {
         OtpValidateResponse.builder().isValid(isValid).code(request.getCode()).build();
 
     // When it's not valid
+    if(!isValid){
+      return Response.failure("OTP validation failed", response);
+    }
     return Response.ok("OTP validated with success!", response);
   }
 }

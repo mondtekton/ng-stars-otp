@@ -1,4 +1,4 @@
-package com.ngstars.email_service.configs;
+package tg.ngstars.email.configs;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

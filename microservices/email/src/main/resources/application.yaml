@@ -1,6 +1,6 @@
 spring:
   application:
-    name: email-service
+    name: email
   profiles:
     active: dev
   config:

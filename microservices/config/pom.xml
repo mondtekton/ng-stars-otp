@@ -8,10 +8,10 @@
 		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mondtekton</groupId>
+	<groupId>tg.ngstars</groupId>
 	<artifactId>config</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>config-server</name>
+	<name>config</name>
 	<description>Configuration server for managing all microservices configuration  and  services like service registery server</description>
 	<url/>
 	<licenses>

@@ -9,10 +9,10 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ngstars</groupId>
+    <groupId>tg.ngstars</groupId>
     <artifactId>otp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>otp-service</name>
+    <name>otp</name>
     <description>Otp management service</description>
     <url/>
     <licenses>
